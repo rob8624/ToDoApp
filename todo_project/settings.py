@@ -80,15 +80,40 @@ WSGI_APPLICATION = 'todo_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        
+
+live = False
+print(f"Live flag is set to: {live}")
+if live == True:
+    print("hello")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'PG_DATA': env("PGDATA"),
+            'PGDATABASE': env("PGDATABASE"),
+            'PGHOST': env("PGHOST"),
+            'PGPASSWORD' : env("PGPASSWORD"),
+            'PGPORT' : env("PGPORT"),
+            'PGUSER' : env("PGUSER"),
+            'POSTGRES_DB': env("POSTGRES_DB"),
+            'POSTGRES_PASSWORD': env("POSTGRES_PASSWORD"),
+            'POSTGRES_USER': env("POSTGRES_USER"),
+            'SSL_CERT_DAYS': env("SSL_CERT_DAYS")
+        }
     }
-}
+
+else:
+    print("Using local database configuration.") 
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env("DB_NAME"),
+            'USER': env("DB_USER"),
+            'PASSWORD': env("DB_PASSWORD"),
+            'HOST': env("DB_HOST", default="localhost"),  
+            'PORT': env("DB_PORT", default="5432"),   
+        }
+    }
 
 
 # Password validation

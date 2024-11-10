@@ -147,4 +147,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ALLOWED_HOSTS = 'todoapp-production-eed7.up.railway.app' 
+ALLOWED_HOSTS = ['todoapp-production-eed7.up.railway.app'] 

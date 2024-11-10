@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 
 import os
+import dj_database_url
 
 import environ
 env = environ.Env()
@@ -87,17 +88,7 @@ if live == True:
     print("hello")
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'PG_DATA': env("PGDATA"),
-            'PGDATABASE': env("PGDATABASE"),
-            'PGHOST': env("PGHOST"),
-            'PGPASSWORD' : env("PGPASSWORD"),
-            'PGPORT' : env("PGPORT"),
-            'PGUSER' : env("PGUSER"),
-            'POSTGRES_DB': env("POSTGRES_DB"),
-            'POSTGRES_PASSWORD': env("POSTGRES_PASSWORD"),
-            'POSTGRES_USER': env("POSTGRES_USER"),
-            'SSL_CERT_DAYS': env("SSL_CERT_DAYS")
+           'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
         }
     }
 

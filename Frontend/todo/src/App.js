@@ -8,16 +8,19 @@ function App() {
 
   useEffect(() => {
 
-    const apiURL = 
-  
-  
+    const apiURL = "https://todoapp-production-eed7.up.railway.app/api/test/"
+
+    axios.get(apiURL).then((response) => {
+      setMessage(response.data.message)
+    })
+    .catch((error) => {
+      setMessage("error connecting")
+      console.log("error fetching data", error)
+    })
   }, [])
 
-
-
-
-  return (
-    <div className="message">Um......I think we better start packing! We are on the move!</div>
+return (
+    <div className="message">{message}</div>
   )
 }
 

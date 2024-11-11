@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'todo_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-live = True
+live = False
 print(f"Live flag is set to: {live}")
 if live == True:
     print("hello")
@@ -150,6 +150,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ALLOWED_HOSTS = ['todoapp-production-eed7.up.railway.app'] 
+ALLOWED_HOSTS = ['todoapp-production-eed7.up.railway.app', '127.0.0.1'] 
 
 CORS_ALLOW_ALL_ORIGINS = True

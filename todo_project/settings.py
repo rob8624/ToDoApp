@@ -164,3 +164,5 @@ STORAGES = {
 }
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+CSRF_TRUSTED_ORIGINS = ['https://todoapp-production-eed7.up.railway.app']

@@ -4,14 +4,17 @@ import React, { useEffect, useState } from "react"
 import axios from "axios";
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('');
 
   useEffect(() => {
 
-    const apiURL = "https://todoapp-production-eed7.up.railway.app/api/test/"
+    const apiURL = "https://todoapp-production-eed7.up.railway.app/api/todos/"
 
     axios.get(apiURL).then((response) => {
-      setMessage(response.data.message)
+      setTodos(response.data)
+      setLoading(false)
     })
     .catch((error) => {
       setMessage("error connecting")
@@ -20,7 +23,16 @@ function App() {
   }, [])
 
 return (
-    <div className="message">{message}</div>
+
+  
+    <div className="message">
+    { loading ? (<p>loading</p>) :
+      todos ? (todos.map((item) => (
+        item.title
+      ) )) : message
+    }
+    </div>
+  
   )
 }
 

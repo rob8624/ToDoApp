@@ -1,3 +1,10 @@
-.message {
-  font-size: 100px;
+ul{
+  list-style: none;
 }
+
+
+
+.todo-container {
+  font-size: 50px; 
+}
+

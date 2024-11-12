@@ -2,6 +2,7 @@
 import './App.css';
 import React, { useEffect, useState } from "react"
 import axios from "axios";
+import ClockLoader from "react-spinners/ClockLoader";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -25,10 +26,13 @@ function App() {
 return (
 
   
-    <div className="message">
-    { loading ? (<p>loading</p>) :
+    <div className="todo-container">
+    <div>Rob & Beths Moving Todo!</div>
+    { loading ? (<ClockLoader />) :
       todos ? (todos.map((item) => (
-        item.title
+        <ul key={item.id}>
+            <li>{item.title}</li>
+          </ul>
       ) )) : message
     }
     </div>

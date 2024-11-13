@@ -2,13 +2,14 @@
 import './App.css';
 import React, { useEffect, useState } from "react"
 import axios from "axios";
+import Modal from "./components/modal.js"
 import ClockLoader from "react-spinners/ClockLoader";
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('');
-  
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
 
@@ -24,13 +25,19 @@ function App() {
     })
   }, [])
 
+const handleOpen= () => {
+  setShowModal(true)
+  console.log(showModal)
+}
+
+
 return (
 
   
     <div className="todo-container">
       <div className='title-flex'>
         <h1>Rob & Beths Moving Todo!</h1>
-        <button className='add-btn'>Add Todo</button>
+        <button className='add-btn' onClick={handleOpen}>Add Todo</button>
       </div>
     { loading ? (<ClockLoader />) :
       todos ? (todos.map((item) => (
@@ -39,6 +46,7 @@ return (
           </ul>
       ) )) : message
     }
+    {showModal ? <Modal setShowModal={setShowModal} />: <div></div>}
     </div>
   
   )

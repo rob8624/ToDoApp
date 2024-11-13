@@ -8,6 +8,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('');
+  
 
   useEffect(() => {
 
@@ -27,7 +28,10 @@ return (
 
   
     <div className="todo-container">
-    <div>Rob & Beths Moving Todo!</div>
+      <div className='title-flex'>
+        <h1>Rob & Beths Moving Todo!</h1>
+        <button className='add-btn'>Add Todo</button>
+      </div>
     { loading ? (<ClockLoader />) :
       todos ? (todos.map((item) => (
         <ul key={item.id}>

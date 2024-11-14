@@ -3,14 +3,17 @@
 export default function Modal({ setShowModal }) {
 
 
-    const handleClose = () => {
-        setShowModal(false)
-        
-      }
-
-    return (
+return (
+    <div className="modal-overlay">
         <div className="modal-flex">
-            <button onClick={handleClose}>HI BETH!!!!!! CLICK ME TO CLOSE ME!!!</button>
+            <div className="modal-text">Add the Todo</div>
+            <form className="modal-btn-flex">
+                
+                    <button className="modal-btn-add" type="submit">Add</button>
+                    <button className="modal-btn-close" onClick={() => setShowModal(false)}>Cancel</button>
+                
+            </form>
         </div>
+    </div>
     )
 }

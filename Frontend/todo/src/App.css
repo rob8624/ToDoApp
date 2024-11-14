@@ -33,8 +33,55 @@ ul{
   align-items: center;
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* High z-index to appear above other content */
+}
+
 .modal-flex {
   display: flex;
   justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  color: white;
 }
 
+.modal-text {
+  font-family: "Raleway", sans-serif;
+}
+
+.modal-btn-flex {
+  display: flex;
+  gap: 20px;
+  padding-top: 5px;
+}
+
+.modal-btn-close {
+  flex:1;
+  color: red;
+}
+
+.modal-btn-add {
+  flex:1;
+}
+
+.modal-btn-add,
+.modal-btn-close {
+  border: 2px solid white;
+  border-radius: 30px;
+  background-color: black;
+  color: white;
+}
+
+.modal-btn-add:active,
+.modal-btn-close:active {
+  background-color: rgb(103, 103, 99);
+}

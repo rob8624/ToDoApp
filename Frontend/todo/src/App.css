@@ -85,3 +85,9 @@ ul{
 .modal-btn-close:active {
   background-color: rgb(103, 103, 99);
 }
+
+.loader-flex {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}

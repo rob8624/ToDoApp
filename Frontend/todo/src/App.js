@@ -26,7 +26,7 @@ function App() {
     axios.get(apiURL).then((response) => {
       setTodos(response.data)
       setLoading(false)
-      console.log(response.data)
+      console.log('response dat', response.data)
       localStorage.setItem('todos', JSON.stringify(response.data))
     })
     .catch((error) => {

@@ -1,19 +1,18 @@
 
 import './App.css';
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios";
 import Modal from "./components/modal.js"
 import ClockLoader from "react-spinners/ClockLoader";
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [owners, setOwners] = useState([])
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('');
   const [showModal, setShowModal] = useState(false)
 
   
-
+ 
   useEffect(() => {
 
     const apiURL = "https://todoapp-production-eed7.up.railway.app/api/todos/"
@@ -34,7 +33,10 @@ function App() {
       console.log("error fetching data", error)
     })
   }
+  
   }, [])
+
+
 
 const handleOpen= () => {
   setShowModal(true)

@@ -49,13 +49,34 @@ ul{
 .modal-flex {
   display: flex;
   justify-content: center;
-  align-content: center;
   flex-direction: column;
   color: white;
 }
 
 .modal-text {
   font-family: "Raleway", sans-serif;
+}
+
+.modal-form-flex {
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.modal-form-flex > select {
+  width: 200px;
+  align-self: center;
+  justify-self: center;
+}
+
+.modal-form-flex > label {
+  font-size: clamp(1rem, 1vw, 4rem);
+  text-align: center;
+}
+
+
+.input-container {
+  width: 10px;
 }
 
 .modal-btn-flex {

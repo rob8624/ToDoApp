@@ -33,8 +33,8 @@ function App() {
       console.log("error fetching data", error)
     })
   }
-  
-  }, [todos])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
 
 

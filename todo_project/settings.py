@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'todo_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-live = False
+live = True
 print(f"Live flag is set to: {live}")
 if live == True:
     print("hello")

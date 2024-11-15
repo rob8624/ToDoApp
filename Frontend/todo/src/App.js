@@ -15,7 +15,7 @@ function App() {
  
   useEffect(() => {
 
-    const apiURL = "https://todoapp-production-eed7.up.railway.app/api/todos/"
+    const apiURL = "http://127.0.0.1:8000/api/todos/"
     const cachedTodos = localStorage.getItem(todos)
 
     if(cachedTodos) {

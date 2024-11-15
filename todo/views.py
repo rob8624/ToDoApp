@@ -19,18 +19,3 @@ class TodoViewSet(viewsets.ModelViewSet):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
 
-class OwnerChoiceView(APIView):
-    def get(self, request):
-     
-        owner_choices = [
-            ('rob', 'Rob'),
-            ('beth', 'Beth'),
-            ('nigel', 'Nigel'),
-            ('joy', 'Joy'),
-            ('joe', "Joe"),
-            ('rob and beth', "Rob and Beth"),
-            ('nigel and joy', "Nigel and Joy"),
-            ('anyone', "Anyone")
-        ]
-        
-        return Response

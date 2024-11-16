@@ -46,15 +46,24 @@ ul{
   z-index: 1000; /* High z-index to appear above other content */
 }
 
+.modal-border {
+  padding: 40px;
+  border: 1px solid white;
+  border-radius: 20px;
+  
+}
+
 .modal-flex {
   display: flex;
   justify-content: center;
   flex-direction: column;
   color: white;
+  
 }
 
 .modal-text {
   font-family: "Raleway", sans-serif;
+ 
 }
 
 .modal-form-flex {

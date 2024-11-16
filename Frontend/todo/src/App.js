@@ -63,7 +63,7 @@ return (
           </ul>
       ) )) : message
     }
-    {showModal ? <Modal setShowModal={setShowModal} />: <div></div>}
+    {showModal ? <Modal setShowModal={setShowModal} todos={todos} />: <div></div>}
     </div>
   
   )

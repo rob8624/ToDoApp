@@ -1,8 +1,10 @@
 
 
-export default function Modal({ setShowModal }) {
+export default function Modal({ setShowModal, todos }) {
 
+console.log('from modal', todos)
 
+const owners = todos.length > 0 ? todos[0].owners_choices : [];
 
 
 return (
@@ -12,7 +14,11 @@ return (
             <form className="modal-form-flex">
                     <label htmlFor="ownerSelect">Select Owner</label>
                     <select id="ownerSelect">
-                        
+                        {
+                           owners.map((item) => (
+                            <option value={item}>{item[0]}</option>
+                           ))
+                        }
                     </select>
                 
                     <div className="modal-btn-flex">

@@ -37,7 +37,17 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+const addTodo = (newToDo) => {
+  const apiURL =  "https://todoapp-production-eed7.up.railway.app/api/todos/"
 
+  axios.post(apiURL, newToDo).then((response) => {
+    setTodos((prevstate) => [...prevstate, response.data])
+    setShowModal(false)
+  }).catch((error) => {
+    console.error("Error adding todo", error);
+    setMessage("Error adding todo");
+  });
+}
 
 const handleOpen= () => {
   setShowModal(true)
@@ -64,7 +74,7 @@ return (
           </ul>
       ) )) : message
     }
-    {showModal ? <Modal setShowModal={setShowModal} todos={todos} />: <div></div>}
+    {showModal ? <Modal setShowModal={setShowModal} todos={todos} addTodo={addTodo}/>: <div></div>}
     </div>
   
   )

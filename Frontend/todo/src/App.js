@@ -68,11 +68,17 @@ return (
       <ClockLoader color="white" />
       </div>
     ) :
-      todos ? (todos.map((item) => (
-        <ul key={item.id}>
-            <li>{item.title}</li>
-          </ul>
-      ) )) : message
+    (<div className='todo-flex'>
+      todos ? { todos.map((item) => (
+        <div className="todo" key={item.id}>
+          <div className='todo-title'>{item.title}</div>
+          <div className='todo-description'>
+                {item.description}
+          </div>
+            <button>Delete</button>
+        </div>
+      ) )} : message
+    </div> )
     }
     {showModal ? <Modal setShowModal={setShowModal} todos={todos} addTodo={addTodo}/>: <div></div>}
     </div>

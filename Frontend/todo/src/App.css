@@ -18,14 +18,33 @@ h1 {
   background-color: rgb(103, 103, 99);
 }
 
-ul{
-  list-style: none;
+.todo-flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin:10px;
+  
+}
+
+.todo {
+  display: flex;         /* Allows layout of title and description */
+  flex-direction: column; /* Stack title and description vertically */
+  align-items: center;    /* Center content within each todo */
+           /* Ensure consistent width for alignment */
+  max-width: auto;       /* Optional: Set a maximum width for consistency */
+  border: 1px solid #ccc; /* Optional: Add border for visibility */
+  padding: 10px;          /* Optional: Add spacing inside each todo */
+  margin: 15px 0;         /* Add space between todos */
+  text-align: center;     /* Center text within each todo */
   color: white;
+  border-radius: 15px;
 }
 
 .todo-container {
   font-size: 50px;
-  
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .title-flex {
@@ -33,6 +52,17 @@ ul{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.todo-title {
+  font-size: clamp(3rem, 4vw, 4rem);
+  font-family: "Raleway", sans-serif;
+  padding: 10px;
+  text-wrap: wrap;
+}
+
+.todo-description {
+  font-size: clamp(1rem, 2vw, 2rem);
 }
 
 .modal-overlay {

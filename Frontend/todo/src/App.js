@@ -52,17 +52,21 @@ const addTodo = (newToDo) => {
 
 const deleteTodo = (id) => {
   const apiURL =  "https://todoapp-production-eed7.up.railway.app/api/todos/"
-  
-  axios.delete(`${apiURL}${id}`)
-  .then(() => {
-    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todo))
-    localStorage.setItem('todos', JSON.stringify(todos.filter(todo => todo.id !== id)));
-  })
-  .catch((error) => {
-    console.error("Error deleting todo", error);
-    setMessage("Error deleting todo");
-  })
-}
+  console.log('Attempting to delete todo with id:', id);
+  axios.delete(`${apiURL}${id}/`)
+    .then(() => {
+      console.log('Delete successful');
+      setTodos(currentTodos => {
+        const newTodos = currentTodos.filter(todo => todo.id !== id);
+        console.log('New todos state:', newTodos);
+        return newTodos;
+      });
+    })
+    .catch((error) => {
+      console.error("Error deleting todo", error);
+      setMessage("Error deleting todo");
+    });
+};
 
 const handleOpen = () => {
   setShowModal(true)

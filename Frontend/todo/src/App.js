@@ -31,7 +31,7 @@ function App() {
     })
     .catch((error) => {
       setMessage("error connecting")
-      console.log("error fetching data", error)
+      console.log("error fetching data", error, message)
     })
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps

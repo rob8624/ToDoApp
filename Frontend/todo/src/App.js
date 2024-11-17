@@ -49,10 +49,26 @@ const addTodo = (newToDo) => {
   });
 }
 
-const handleOpen= () => {
+
+const deleteTodo = (id) => {
+  const apiURL =  "https://todoapp-production-eed7.up.railway.app/api/todos/"
+  
+  axios.delete(`${apiURL}${id}`)
+  .then(() => {
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todo))
+    localStorage.setItem('todos', JSON.stringify(todos.filter(todo => todo.id !== id)));
+  })
+  .catch((error) => {
+    console.error("Error deleting todo", error);
+    setMessage("Error deleting todo");
+  })
+}
+
+const handleOpen = () => {
   setShowModal(true)
   console.log(showModal)
 }
+
 
 
 return (
@@ -75,7 +91,7 @@ return (
           <div className='todo-description'>
                 {item.description}
           </div>
-            <button>Delete</button>
+            <button onClick={() => deleteTodo(item.id)}>Delete</button>
         </div>
       ) )} : message
     </div> )

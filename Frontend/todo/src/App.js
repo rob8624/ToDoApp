@@ -81,6 +81,20 @@ return (
     <div className="todo-container">
       <div className='title-flex'>
         <h1>Rob & Beths Moving Todo!</h1>
+        <div className='priority-chart'>
+            <div className='priority-low'>
+              <div>Low</div>
+              <div className='low-color'>BLUE</div>
+            </div>
+            <div className='priority-medium'>
+              <div>Medium</div>
+              <div className='medium-color'>GREEN</div>
+            </div>
+              <div className='priority-high'>
+              <div>High</div>
+            <div className='high-color'>PINK</div>
+            </div>
+        </div>
         <button className='add-btn' onClick={handleOpen}>Add Todo</button>
       </div>
     { loading ? (
@@ -90,7 +104,13 @@ return (
     ) :
     (<div className='todo-flex'>
       todos ? { todos.map((item) => (
-        <div className="todo" key={item.id}>
+        <div key={item.id}
+        className="todo" style={{ 
+          backgroundColor: item.priority === 'high' ? '#EF7DC1' : 
+                           item.priority === 'medium' ? '#10BE3F' :
+                           item.priority === 'low' ? '#12AFBB' : 
+                           '#f1f8e9'
+        }} >
           <div className='todo-title'>{item.title}</div>
           <div className='todo-description'>
                 {item.description}

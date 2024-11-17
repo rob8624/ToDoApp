@@ -5,6 +5,33 @@ h1 {
   font-size: clamp(2rem, 4vw, 8rem);
 }
 
+.priority-chart {
+  display: flex;
+  color: white;
+  flex-wrap: wrap;
+}
+.priority-low, .priority-medium, .priority-high
+{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  padding: 40px;
+  font-size: clamp(1rem, 2vw, 5rem)
+}
+
+.low-color {
+ color: #12AFBB;
+}
+
+.medium-color {
+    color: #10BE3F;
+}
+
+.high-color {
+  color: #EF7DC1;
+}
+
 .add-btn {
  width: 40%;
  padding: 10px;
@@ -40,6 +67,7 @@ h1 {
   color: white;
   border-radius: 15px;
 }
+
 
 .todo-container {
   font-size: 50px;

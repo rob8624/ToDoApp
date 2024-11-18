@@ -65,13 +65,13 @@ return (
                                 </select>
                             </div> 
                         </div>
-                        <label htmlFor="titleInput">Title</label>
+                        <label htmlFor="titleInput">Todo</label>
                         <input id="titleInput" type="text"  
                         name="title" 
                         value={formData.title} 
                         onChange={handleChange}></input>
 
-                        <label htmlFor="todoDescription">ToDo</label>
+                        <label htmlFor="todoDescription">Details (if needed) </label>
                         <textarea id="todoDescription"  
                         name="description" 
                         value={formData.description} 

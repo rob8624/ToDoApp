@@ -9,7 +9,8 @@ class Todo(models.Model):
         ('nigel', 'Nigel'),
         ('joy', 'Joy'),
         ('joe', "Joe"),
-        (' rob and beth', "Rob and Beth"),
+        ('hannh and adam', "Hannah and Adam"),
+        ('rob and beth', "Rob and Beth"),
         ('nigel and joy', "Nigel and Joy"),
         ('anyone', "Anyone")]
     
@@ -30,5 +31,7 @@ class Todo(models.Model):
 
     def __str__(self) -> str:
         return self.title
+    
+
     
 

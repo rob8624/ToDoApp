@@ -81,7 +81,7 @@ return (
   
     <div className="todo-container">
       <div className='title-flex'>
-        <h1>Rob & Beths Moving Todo!</h1>
+        <h1>KanDoCards</h1>
         <div className='priority-chart'>
             <div className='priority-low'>
               <div>Low</div>

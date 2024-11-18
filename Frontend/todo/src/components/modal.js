@@ -8,12 +8,14 @@ const [formData, setFormData] = useState({
         owner: "",
         priority: ""});
 
+
 const handleChange = (e) => {
     e.preventDefault()
     const { name, value } = e.target;
     setFormData((prevData) => (
         {...prevData, [name]: value}
     ))
+   
 }  
 
 const handleSubmit = (e) => {
@@ -37,7 +39,7 @@ return (
                         
                         <div className="select-flex">
                             <div className="owner-flex">
-                                <label className="owner-label" htmlFor="ownerSelect">Owner</label>
+                                <label className="owner-label" htmlFor="ownerSelect">Owner(required)</label>
                                     <select id="ownerSelect" 
                                     name="owner" // Ensure the name matches your state property
                                     value={formData.owner} // Bind to state
@@ -51,12 +53,12 @@ return (
                                     </select>
                             </div>
                             <div className="priority-flex">         
-                            <label className="priority-label" htmlFor="prioritySelect">Priority</label>  
+                            <label className="priority-label" htmlFor="prioritySelect">Priority(required)</label>  
                                 <select id="prioritySelect" 
                                     name="priority" 
                                     value={formData.priority} 
                                     onChange={handleChange}>
-                                <option value="">Select Priority</option>
+                                <option value="">Select Priority(required)</option>
                                 {
                                     priority.map((item) => (
                                         <option key={item[0]} value={item[0]}>{item[1]}</option>
@@ -65,7 +67,7 @@ return (
                                 </select>
                             </div> 
                         </div>
-                        <label htmlFor="titleInput">Todo</label>
+                        <label htmlFor="titleInput">Todo(required)</label>
                         <input id="titleInput" type="text"  
                         name="title" 
                         value={formData.title} 

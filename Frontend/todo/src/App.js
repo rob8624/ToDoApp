@@ -3,6 +3,7 @@ import './App.css';
 import React, { useEffect, useState } from "react"
 import axios from "axios";
 import Modal from "./components/modal.js"
+import Todo from "./components/todo.js"
 import ClockLoader from "react-spinners/ClockLoader";
 
 function App() {
@@ -102,23 +103,7 @@ return (
       <ClockLoader color="white" />
       </div>
     ) :
-    (<div className='todo-flex'>
-      todos ? { todos.map((item) => (
-        <div key={item.id}
-        className="todo" style={{ 
-          backgroundColor: item.priority === 'high' ? '#EF7DC1' : 
-                           item.priority === 'medium' ? '#10BE3F' :
-                           item.priority === 'low' ? '#12AFBB' : 
-                           '#f1f8e9'
-        }} >
-          <div className='todo-title'>{item.title}</div>
-          <div className='todo-description'>
-                {item.description}
-          </div>
-            <button onClick={() => deleteTodo(item.id)}>Delete</button>
-        </div>
-      ) )} : message
-    </div> )
+    ( <Todo todos={todos} deleteTodo={deleteTodo} />)
     }
     {showModal ? <Modal setShowModal={setShowModal} todos={todos} addTodo={addTodo}/>: <div></div>}
     </div>

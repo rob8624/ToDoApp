@@ -32,6 +32,14 @@ h1 {
   color: #EF7DC1;
 }
 
+.delete-btn {
+  background-color: white;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
 .add-btn {
  width: 40%;
  padding: 10px;

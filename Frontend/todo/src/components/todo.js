@@ -19,7 +19,7 @@ export default function Todo({ todos, deleteTodo }) {
           <div className='todo-description'>
                 {item.description}
           </div>
-            <button onClick={() => deleteTodo(item.id)}>Delete</button>
+            <button className="delete-btn" onClick={() => deleteTodo(item.id)}>Delete</button>
         </div>
       ) )} : message
     </div>)

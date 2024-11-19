@@ -103,7 +103,7 @@ return (
       <ClockLoader color="white" />
       </div>
     ) :
-    ( <Todo todos={todos} deleteTodo={deleteTodo} />)
+    ( <Todo todos={todos} deleteTodo={deleteTodo}  setTodos={setTodos}/>)
     }
     {showModal ? <Modal setShowModal={setShowModal} todos={todos} addTodo={addTodo}/>: <div></div>}
     </div>

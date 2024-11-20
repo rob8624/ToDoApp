@@ -11,6 +11,8 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('');
   const [showModal, setShowModal] = useState(false)
+  const [editing, setEditing] = useState(null)
+  const [currentTodo, setCurrentTodo] = useState(null)
 
   
  
@@ -103,9 +105,21 @@ return (
       <ClockLoader color="white" />
       </div>
     ) :
-    ( <Todo todos={todos} deleteTodo={deleteTodo}  setTodos={setTodos}/>)
+    ( <Todo todos={todos} deleteTodo={deleteTodo}  
+      setTodos={setTodos} 
+      editing={editing} 
+      setEditing={setEditing}
+      showModal={showModal}
+      setShowModal={setShowModal}
+      currentTodo={currentTodo}
+      setCurrentTodo={setCurrentTodo}/>)
     }
-    {showModal ? <Modal setShowModal={setShowModal} todos={todos} addTodo={addTodo}/>: <div></div>}
+    {showModal ? <Modal setShowModal={setShowModal} todos={todos} 
+    addTodo={addTodo} 
+    editing={editing} 
+    setEditing={setEditing}
+    currentTodo={currentTodo}
+    setCurrentTodo={setCurrentTodo}/>: <div></div>}
     </div>
   
   )

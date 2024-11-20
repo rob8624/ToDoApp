@@ -4,9 +4,18 @@ import React from "react";
 
 
 
-export default function Todo({ todos, setTodos, deleteTodo }) {
+export default function Todo({ todos, setTodos, deleteTodo, 
+    showModal, setShowModal, editing, setEditing, currentTodo, setCurrentTodo }) {
 
-    
+      
+      
+
+    const handleEditing = (id) => {
+        setShowModal(true)
+        setEditing(true)
+        setCurrentTodo(todos.find((todo) => todo.id === id))
+        return console.log(currentTodo)
+    }
 
     const handleCompleted = (id) => {
         
@@ -49,7 +58,10 @@ export default function Todo({ todos, setTodos, deleteTodo }) {
           <div className='todo-description'>
                 { item.completed ? "ALL DONE GOOD WORK" : item.description }
           </div>
+          <div className="edit-delete-flex">
             { !item.sticky ? <button className="delete-btn" onClick={() => deleteTodo(item.id)}>Delete</button>: <div></div> }
+            <button className="edit-btn" onClick={() => handleEditing(item.id)}>edit</button>
+           </div> 
         </div>
       ) )} : message
     </div>)

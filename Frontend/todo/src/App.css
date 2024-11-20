@@ -32,7 +32,7 @@ h1 {
   color: #EF7DC1;
 }
 
-.delete-btn {
+.delete-btn, .edit-btn {
   background-color: white;
   color: black;
   padding: 5px;
@@ -94,7 +94,7 @@ h1 {
 
 .todo-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 10px;
   width: 100%;
   font-size: clamp(1rem, 1vw, 1rem)
@@ -135,11 +135,14 @@ h1 {
 }
 
 .modal-border {
-  padding: 40px;
+  padding: 25px;
   border: 1px solid white;
   border-radius: 20px;
   background-color: black; 
   margin:5px;
+  display: flex;
+  
+  
   
 }
 
@@ -148,7 +151,6 @@ h1 {
   justify-content: center;
   flex-direction: column;
   color: white;
-  
 }
 
 .modal-text {
@@ -174,6 +176,11 @@ h1 {
 .modal-form-flex > label {
   font-size: clamp(1rem, 1vw, 4rem);
   text-align: center;
+}
+
+.edit-delete-flex {
+  display: flex;
+  gap:10px;
 }
 
 .select-flex {

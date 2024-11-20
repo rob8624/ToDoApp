@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 
-export default function Modal({ setShowModal, todos, addTodo }) {
+export default function Modal({ setShowModal, todos, addTodo, 
+    setEditing, editing, currentTodo, setCurrentTodo }) {
 
-const [formData, setFormData] = useState({
+
+
+
+const [formData, setFormData] = useState(editing ? 
+    
+    {title: currentTodo.title,
+    description: currentTodo.descritpion,
+    owner: currentTodo.owner,
+    priority: currentTodo.priority} :
+
+    {
         title: "",
         description: "",
         owner: "",
         priority: ""});
+
 
 
 const handleChange = (e) => {

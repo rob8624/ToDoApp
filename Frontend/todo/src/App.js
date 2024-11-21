@@ -16,8 +16,7 @@ function App() {
 
   
  
-  useEffect(() => {
-
+  const fetchTodos = () => {
     const apiURL = "https://todoapp-production-eed7.up.railway.app/api/todos/"
     const cachedTodos = localStorage.getItem(todos)
 
@@ -37,8 +36,13 @@ function App() {
       console.log("error fetching data", error, message)
     })
   }
+  }
+  
+useEffect(() => {
+    fetchTodos()
+    
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+}, [])
 
 const addTodo = (newToDo) => {
   const apiURL =  "https://todoapp-production-eed7.up.railway.app/api/todos/"
@@ -56,6 +60,7 @@ const addTodo = (newToDo) => {
 
   axios.post(apiURL, newToDo).then((response) => {
     setTodos((prevstate) => [...prevstate, response.data])
+    fetchTodos()
     setShowModal(false)
   }).catch((error) => {
     console.error("Error adding todo", error);

@@ -68,7 +68,7 @@ h1 {
   flex-direction: column; /* Stack title and description vertically */
   align-items: center;    /* Center content within each todo */
            /* Ensure consistent width for alignment */
-  max-width: auto;       /* Optional: Set a maximum width for consistency */
+  max-width: fit-content;       /* Optional: Set a maximum width for consistency */
   border: 1px solid #ccc; /* Optional: Add border for visibility */
   padding: 10px;          /* Optional: Add spacing inside each todo */
   margin: 15px 0;         /* Add space between todos */
@@ -97,8 +97,7 @@ h1 {
   justify-content: flex-start;
   gap: 10px;
   width: 100%;
-  font-size: clamp(1rem, 1vw, 1rem)
-  
+  font-size: clamp(1rem, 1vw, 1rem);
 }
 
 
@@ -114,6 +113,8 @@ h1 {
 
 .todo-description {
   font-size: clamp(1rem, 2vw, 2rem);
+  max-width: 50%;
+  flex-grow: 0;
 }
 
 .checkbox-flex {

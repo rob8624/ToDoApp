@@ -10,7 +10,7 @@ const [formData, setFormData] = useState(editing ?
     
     {id: currentTodo.id,
     title: currentTodo.title,
-    description: currentTodo.descritpion,
+    description: currentTodo.description,
     owner: currentTodo.owner,
     priority: currentTodo.priority} :
 

@@ -43,6 +43,17 @@ function App() {
 const addTodo = (newToDo) => {
   const apiURL =  "https://todoapp-production-eed7.up.railway.app/api/todos/"
 
+  if (editing) {
+    console.log(newToDo)
+    axios.put(`${apiURL}${newToDo.id}/`, newToDo).then((response) => {
+     setTodos((prevstate) => {
+     setShowModal(false)
+     setEditing(null) 
+    return prevstate.map((todo) => todo.id === newToDo.id ? response.data : todo )
+     })
+    })
+  } else {
+
   axios.post(apiURL, newToDo).then((response) => {
     setTodos((prevstate) => [...prevstate, response.data])
     setShowModal(false)
@@ -50,6 +61,7 @@ const addTodo = (newToDo) => {
     console.error("Error adding todo", error);
     setMessage("Error adding todo");
   });
+}
 }
 
 
@@ -98,7 +110,7 @@ return (
             <div className='high-color'>PINK</div>
             </div>
         </div>
-        <button className='add-btn' onClick={handleOpen}>Add Todo</button>
+        <button className='add-btn' onClick={handleOpen}>Click to add a Card</button>
       </div>
     { loading ? (
       <div className='loader-flex'>

@@ -8,12 +8,14 @@ export default function Modal({ setShowModal, todos, addTodo,
 
 const [formData, setFormData] = useState(editing ? 
     
-    {title: currentTodo.title,
+    {id: currentTodo.id,
+    title: currentTodo.title,
     description: currentTodo.descritpion,
     owner: currentTodo.owner,
     priority: currentTodo.priority} :
 
     {
+        id: "",
         title: "",
         description: "",
         owner: "",
@@ -46,7 +48,7 @@ return (
     <div className="modal-overlay">
         <div className="modal-border">
             <div className="modal-flex">
-                <div className="modal-text">Add the Todo</div>
+                <div className="modal-text">Add a Card</div>
                 <form className="modal-form-flex" onSubmit={handleSubmit}>
                         
                         <div className="select-flex">
@@ -92,8 +94,11 @@ return (
                         onChange={handleChange}></textarea>
                         
                         <div className="modal-btn-flex">
-                            <button className="modal-btn-add" type="submit" disabled={!isFormValid} >Add</button>
-                            <button className="modal-btn-close" onClick={() => setShowModal(false)}>Cancel</button>
+                            <button className="modal-btn-add" type="submit" disabled={!isFormValid} >{ editing === true ? 'Edit Card' : 'Add'}</button>
+                            <button className="modal-btn-close"  onClick={() => {
+                                                                                setShowModal(false);
+                                                                                setEditing(null);
+                                                                                        }}>Cancel</button>
                         </div>
                     
                 </form>

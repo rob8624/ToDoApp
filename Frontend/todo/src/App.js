@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import axios from "axios";
 import Modal from "./components/modal.js"
 import Todo from "./components/todo.js"
+import FilterSelect from "./components/filterSelect.js"
 import ClockLoader from "react-spinners/ClockLoader";
 
 function App() {
@@ -116,6 +117,7 @@ return (
             </div>
         </div>
         <button className='add-btn' onClick={handleOpen}>Click to add a Card</button>
+        <FilterSelect todos={todos} setTodos={setTodos}/>
       </div>
     { loading ? (
       <div className='loader-flex'>

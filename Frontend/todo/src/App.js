@@ -5,6 +5,7 @@ import axios from "axios";
 import Modal from "./components/modal.js"
 import Todo from "./components/todo.js"
 import FilterSelect from "./components/filterSelect.js"
+import DeleteConfirm from "./components/deleteConfirm.js"
 import ClockLoader from "react-spinners/ClockLoader";
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
   const [showModal, setShowModal] = useState(false)
   const [editing, setEditing] = useState(null)
   const [currentTodo, setCurrentTodo] = useState(null)
+  const [ deleteting, setDeleting] = useState(null)
+  const [todoToDelete, setTodoToDelete] = useState('')
 
   
  
@@ -71,15 +74,22 @@ const addTodo = (newToDo) => {
 }
 
 
+
+
+
+
 const deleteTodo = (id) => {
   const apiURL =  "https://todoapp-production-eed7.up.railway.app/api/todos/"
   console.log('Attempting to delete todo with id:', id);
-  axios.delete(`${apiURL}${id}/`)
+
+  
+axios.delete(`${apiURL}${id}/`)
     .then(() => {
       console.log('Delete successful');
       setTodos(currentTodos => {
         const newTodos = currentTodos.filter(todo => todo.id !== id);
         console.log('New todos state:', newTodos);
+        setDeleting(false)
         return newTodos;
       });
     })
@@ -87,7 +97,20 @@ const deleteTodo = (id) => {
       console.error("Error deleting todo", error);
       setMessage("Error deleting todo");
     });
+    
 };
+
+
+const handleDelete = (id) =>  {
+  setDeleting(true)
+  setTodoToDelete(id)
+  
+  console.log(id)
+}
+
+const confirmDelete = () => {
+  deleteTodo(todoToDelete)
+  }
 
 const handleOpen = () => {
   setShowModal(true)
@@ -131,7 +154,10 @@ return (
       showModal={showModal}
       setShowModal={setShowModal}
       currentTodo={currentTodo}
-      setCurrentTodo={setCurrentTodo}/>)
+      setCurrentTodo={setCurrentTodo}
+      deleteting={deleteting}
+      setdeleting={setDeleting}
+      handleDelete={handleDelete}/>)
     }
     {showModal ? <Modal setShowModal={setShowModal} todos={todos} 
     addTodo={addTodo} 
@@ -139,6 +165,7 @@ return (
     setEditing={setEditing}
     currentTodo={currentTodo}
     setCurrentTodo={setCurrentTodo}/>: <div></div>}
+    { deleteting ? <DeleteConfirm setDeleting={setDeleting} confirmDelete={confirmDelete} /> : <div></div>}
     </div>
   
   )

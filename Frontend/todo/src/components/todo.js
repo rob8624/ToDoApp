@@ -5,7 +5,10 @@ import axios from "axios";
 
 
 export default function Todo({ todos, setTodos, deleteTodo, 
-    showModal, setShowModal, editing, setEditing, currentTodo, setCurrentTodo }) {
+    showModal, setShowModal, editing, 
+    setEditing, currentTodo, setCurrentTodo,
+   deleting, setDeleting, handleDelete}) {
+
 
       
       
@@ -60,7 +63,7 @@ export default function Todo({ todos, setTodos, deleteTodo,
                 }</div> 
             <div className="checkbox-flex">
               <label for="completedCheckbox">Done?</label>     
-             <input id="completedChecbox" type="checkbox" onChange={() => handleCompleted(item.id)}/>
+             <input id="completedChecbox" type="checkbox" checked={item.completed}  onChange={() => handleCompleted(item.id)}/>
             </div>
         </div>  
           <div className='todo-title' style={{ textDecoration: item.completed ? 'line-through' : 'none' }}>{item.title}</div>
@@ -68,10 +71,12 @@ export default function Todo({ todos, setTodos, deleteTodo,
                 { item.completed ? "ALL DONE GOOD WORK" : item.description }
           </div>
           <div className="edit-delete-flex">
-            { !item.sticky ? <button className="delete-btn" onClick={() => deleteTodo(item.id)}>Delete</button>: <div></div> }
+            { !item.sticky ? <button className="delete-btn" onClick={() => handleDelete(item.id)}>Delete</button>: <div></div> }
             <button className="edit-btn" onClick={() => handleEditing(item.id)}>edit</button>
            </div> 
         </div>
       ) )} : message
     </div>)
 }
+
+//{ !item.sticky ? <button className="delete-btn" onClick={() => deleteTodo(item.id)}>Delete</button>: <div></div> }

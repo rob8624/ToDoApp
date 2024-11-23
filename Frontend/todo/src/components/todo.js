@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from "axios";
 
 
 
@@ -17,14 +17,23 @@ export default function Todo({ todos, setTodos, deleteTodo,
         return console.log(currentTodo)
     }
 
-    const handleCompleted = (id) => {
-        
-        setTodos((prevTodos) => prevTodos.map((item) => (
-            item.id === id ? { ...item, completed: !item.completed  }  : item
-        ))
-    
-    )
-    }
+    const handleCompleted = async (id) => {
+      const todo = todos.find((todo) => todo.id === id);
+      const apiURL = "https://todoapp-production-eed7.up.railway.app/api/todos/";
+      
+      try {
+          const response = await axios.put(`${apiURL}${id}/`, {
+              ...todo,
+              completed: !todo.completed
+          });
+          
+          setTodos((prevTodos) => prevTodos.map((item) => 
+              item.id === id ? response.data : item
+          ));
+      } catch (error) {
+          console.error("Error updating todo completion status:", error);
+      }
+  }
 
     return (
     <div className='todo-flex'>

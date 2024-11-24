@@ -17,6 +17,9 @@ function App() {
   const [currentTodo, setCurrentTodo] = useState(null)
   const [ deleteting, setDeleting] = useState(null)
   const [todoToDelete, setTodoToDelete] = useState('')
+  const [filterByCompleted, setFilterByCompleted] = useState([])
+  const [todosCount, setTodoCount] = useState(null)
+  const [filterByPriority, setFilerByPriority] = useState(null)
 
   
  
@@ -26,14 +29,16 @@ function App() {
 
     if(cachedTodos) {
       setTodos(JSON.parse(cachedTodos))
+     
       setLoading(false)
     } else {
     axios.get(apiURL).then((response) => {
       setTodos(response.data)
+      setTodoCount(todos.length)
       setLoading(false)
-      
       console.log('response data', response.data)
       localStorage.setItem('todos', JSON.stringify(response.data))
+      
     })
     .catch((error) => {
       setMessage("error connecting")
@@ -73,17 +78,10 @@ const addTodo = (newToDo) => {
 }
 }
 
-
-
-
-
-
 const deleteTodo = (id) => {
   const apiURL =  "https://todoapp-production-eed7.up.railway.app/api/todos/"
-  console.log('Attempting to delete todo with id:', id);
-
   
-axios.delete(`${apiURL}${id}/`)
+  axios.delete(`${apiURL}${id}/`)
     .then(() => {
       console.log('Delete successful');
       setTodos(currentTodos => {
@@ -97,15 +95,11 @@ axios.delete(`${apiURL}${id}/`)
       console.error("Error deleting todo", error);
       setMessage("Error deleting todo");
     });
-    
-};
-
+  };
 
 const handleDelete = (id) =>  {
   setDeleting(true)
   setTodoToDelete(id)
-  
-  console.log(id)
 }
 
 const confirmDelete = () => {
@@ -114,7 +108,10 @@ const confirmDelete = () => {
 
 const handleOpen = () => {
   setShowModal(true)
-  console.log(showModal)
+}
+
+const handleCompleteFilter = () => {
+  setFilterByCompleted(!filterByCompleted)
 }
 
 
@@ -139,15 +136,33 @@ return (
             <div className='high-color'>PINK</div>
             </div>
         </div>
+        
         <button className='add-btn' onClick={handleOpen}>Click to add a Card</button>
-        <FilterSelect todos={todos} setTodos={setTodos}/>
+        <div className='filter-menu-flex'>
+    <label htmlFor="completed-checkbox" className='completed-check-label'>
+        {todosCount}{filterByCompleted ? 'Check to show completed': 'uncheck to show all'}
+    </label>
+    <input 
+        id="completed-checkbox" 
+        style={{'color': 'white'}} 
+        type='checkbox' 
+        onChange={handleCompleteFilter}
+    />
+    <FilterSelect 
+        className="filter-priority-select"
+        todos={todos} 
+        setTodos={setTodos} 
+        filterByPriority={filterByPriority} 
+        setFilterByPriority={setFilerByPriority}
+    />
+</div>
       </div>
     { loading ? (
       <div className='loader-flex'>
       <ClockLoader color="white" />
       </div>
     ) :
-    ( <Todo todos={todos} deleteTodo={deleteTodo}  
+     ( <Todo todos={todos} deleteTodo={deleteTodo}  
       setTodos={setTodos} 
       editing={editing} 
       setEditing={setEditing}
@@ -157,7 +172,9 @@ return (
       setCurrentTodo={setCurrentTodo}
       deleteting={deleteting}
       setdeleting={setDeleting}
-      handleDelete={handleDelete}/>)
+      handleDelete={handleDelete}
+      filterByCompleted={filterByCompleted}
+      filterByPriority={filterByPriority}/> ) 
     }
     {showModal ? <Modal setShowModal={setShowModal} todos={todos} 
     addTodo={addTodo} 

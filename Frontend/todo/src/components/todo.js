@@ -7,7 +7,7 @@ import axios from "axios";
 export default function Todo({ todos, setTodos, deleteTodo, 
     showModal, setShowModal, editing, 
     setEditing, currentTodo, setCurrentTodo,
-   deleting, setDeleting, handleDelete}) {
+   deleting, setDeleting, handleDelete, filterByCompleted, filterByPriority}) {
 
 
       
@@ -40,7 +40,13 @@ export default function Todo({ todos, setTodos, deleteTodo,
 
     return (
     <div className='todo-flex'>
-      todos ? { todos.map((item) => (
+      <div className="priority-filter">{filterByPriority ? 'Showing ' + filterByPriority + ' cards' : ''}</div>
+      todos ? {
+        
+      } {todos.filter(todo => 
+        (filterByCompleted ? todo : todo.completed) && 
+        (filterByPriority ? todo.priority === filterByPriority : todo)
+      ).map((item) => (
         <div key={item.id}
         className="todo"  style={{ 
          

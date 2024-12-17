@@ -1,5 +1,8 @@
 import React from "react";
 import axios from "axios";
+import { Reorder } from 'framer-motion';
+
+
 
 
 
@@ -38,8 +41,14 @@ export default function Todo({ todos, setTodos, deleteTodo,
       }
   }
 
+  const handleReorder = (newOrder) => {
+    setTodos(newOrder); 
+  };
+
     return (
+      <Reorder.Group values={todos} onReorder={handleReorder}>
     <div className='todo-flex'>
+      
       <div className="priority-filter">{filterByPriority ? 'Showing ' + filterByPriority + ' cards' : ''}</div>
       todos ? {
         
@@ -47,6 +56,7 @@ export default function Todo({ todos, setTodos, deleteTodo,
         (filterByCompleted ? todo : todo.completed) && 
         (filterByPriority ? todo.priority === filterByPriority : todo)
       ).map((item) => (
+        <Reorder.Item value={item} key={item.id}>
         <div key={item.id}
         className="todo"  style={{ 
          
@@ -81,8 +91,11 @@ export default function Todo({ todos, setTodos, deleteTodo,
             <button className="edit-btn" onClick={() => handleEditing(item.id)}>edit</button>
            </div> 
         </div>
+        </Reorder.Item>
       ) )} : message
-    </div>)
+    </div>
+    </Reorder.Group>
+    )
 }
 
 //{ !item.sticky ? <button className="delete-btn" onClick={() => deleteTodo(item.id)}>Delete</button>: <div></div> }

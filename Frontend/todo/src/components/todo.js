@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { useState } from "react";
 import { Reorder } from 'framer-motion';
 
 
@@ -12,8 +13,13 @@ export default function Todo({ todos, setTodos, deleteTodo,
     setEditing, currentTodo, setCurrentTodo,
    deleting, setDeleting, handleDelete, filterByCompleted, filterByPriority}) {
 
+    const [ordering, setOrdering] = useState(false)
 
-      
+
+    console.log('todos', todos) 
+    
+    const Container = ordering ? Reorder.Group : 'div';
+    const ItemContainer = ordering ? Reorder.Item :'div'; 
       
 
     const handleEditing = (id) => {
@@ -42,12 +48,24 @@ export default function Todo({ todos, setTodos, deleteTodo,
   }
 
   const handleReorder = (newOrder) => {
-    setTodos(newOrder); 
+    if (ordering) {
+      console.log('saved')
+      setOrdering(!ordering)
+    } 
+    else {
+      setOrdering(!ordering)
+    }
+    
   };
 
+  console.log(setOrdering)
+
     return (
-      <Reorder.Group values={todos} onReorder={handleReorder}>
+      
+       <Container {...ordering && { values: todos, onReorder: setTodos }}> 
     <div className='todo-flex'>
+     <div style={{color:'white'}} onClick={handleReorder}>{ ordering ? 'Save' : 'ReOrder'}</div>
+     {ordering && <div style={{color:'white'}} onClick={() => setOrdering(false)}>Cancal</div>}
       
       <div className="priority-filter">{filterByPriority ? 'Showing ' + filterByPriority + ' cards' : ''}</div>
       todos ? {
@@ -56,7 +74,7 @@ export default function Todo({ todos, setTodos, deleteTodo,
         (filterByCompleted ? todo : todo.completed) && 
         (filterByPriority ? todo.priority === filterByPriority : todo)
       ).map((item) => (
-        <Reorder.Item value={item} key={item.id}>
+        <ItemContainer {...ordering && {value:item, key:item.id}}>
         <div key={item.id}
         className="todo"  style={{ 
          
@@ -91,10 +109,10 @@ export default function Todo({ todos, setTodos, deleteTodo,
             <button className="edit-btn" onClick={() => handleEditing(item.id)}>edit</button>
            </div> 
         </div>
-        </Reorder.Item>
+        </ItemContainer>
       ) )} : message
     </div>
-    </Reorder.Group>
+    </Container>
     )
 }
 

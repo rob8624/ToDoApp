@@ -14,9 +14,11 @@ export default function Todo({ todos, setTodos, deleteTodo,
    deleting, setDeleting, handleDelete, filterByCompleted, filterByPriority}) {
 
     const [ordering, setOrdering] = useState(false)
+    const [originalTodos, setOriginalTodos] = useState(todos)
 
 
     console.log('todos', todos) 
+    
     
     const Container = ordering ? Reorder.Group : 'div';
     const ItemContainer = ordering ? Reorder.Item :'div'; 
@@ -50,6 +52,8 @@ export default function Todo({ todos, setTodos, deleteTodo,
   const handleReorder = (newOrder) => {
     if (ordering) {
       console.log('saved')
+      setTodos(todos)
+      setOriginalTodos(todos)
       setOrdering(!ordering)
     } 
     else {
@@ -58,6 +62,13 @@ export default function Todo({ todos, setTodos, deleteTodo,
     
   };
 
+  const handleCancel = () => {
+    setTodos(originalTodos)
+    setOrdering(false)
+  }
+
+  
+
   console.log(setOrdering)
 
     return (
@@ -65,7 +76,7 @@ export default function Todo({ todos, setTodos, deleteTodo,
        <Container {...ordering && { values: todos, onReorder: setTodos }}> 
     <div className='todo-flex'>
      <div style={{color:'white'}} onClick={handleReorder}>{ ordering ? 'Save' : 'ReOrder'}</div>
-     {ordering && <div style={{color:'white'}} onClick={() => setOrdering(false)}>Cancal</div>}
+     {ordering && <div style={{color:'white'}} onClick={handleCancel}>Cancel</div>}
       
       <div className="priority-filter">{filterByPriority ? 'Showing ' + filterByPriority + ' cards' : ''}</div>
       todos ? {

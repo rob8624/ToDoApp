@@ -7,6 +7,8 @@ import Todo from "./components/todo.js"
 import FilterSelect from "./components/filterSelect.js"
 import DeleteConfirm from "./components/deleteConfirm.js"
 import ClockLoader from "react-spinners/ClockLoader";
+import { useScroll } from "motion/react"
+import { motion } from "motion/react"
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -20,6 +22,9 @@ function App() {
   const [filterByCompleted, setFilterByCompleted] = useState([])
   const [todosCount, setTodoCount] = useState(null)
   const [filterByPriority, setFilerByPriority] = useState(null)
+
+  const { scrollYProgress } = useScroll();
+ 
 
   
  
@@ -120,6 +125,8 @@ return (
 
   
     <div className="todo-container">
+      
+      <motion.div className='top-scroll' style={{ scaleX: scrollYProgress, originX: 0 }} />
       <div className='title-flex'>
         <h1>KanDoCards</h1>
         <div className='priority-chart'>

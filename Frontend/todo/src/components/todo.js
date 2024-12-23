@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Reorder } from 'framer-motion';
 
 
@@ -18,6 +18,10 @@ export default function Todo({ todos, setTodos, deleteTodo,
 
 
     console.log('todos', todos) 
+
+    useEffect(() => {
+      setOriginalTodos(todos); // Re-sync when todos prop changes
+  }, [todos]);
     
     
     const Container = ordering ? Reorder.Group : 'div';

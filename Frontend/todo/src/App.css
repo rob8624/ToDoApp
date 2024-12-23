@@ -5,6 +5,18 @@ h1 {
   font-size: clamp(2rem, 4vw, 8rem);
 }
 
+.top-scroll {
+  background-color: white;
+  height: 10px;
+  position: fixed; /* optional, to make it stay at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* optional, ensure it spans the full width */
+  z-index: 9999; /* optional, to make sure it's above other content */
+  
+  border: 2px black solid
+}
+
 .priority-chart {
   display: flex;
   color: white;

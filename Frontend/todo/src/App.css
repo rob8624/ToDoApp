@@ -14,7 +14,7 @@ h1 {
   width: 100%; /* optional, ensure it spans the full width */
   z-index: 9999; /* optional, to make sure it's above other content */
   
-  border: 2px black solid
+  
 }
 
 .priority-chart {

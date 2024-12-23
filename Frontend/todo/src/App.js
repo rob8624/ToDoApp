@@ -9,6 +9,8 @@ import DeleteConfirm from "./components/deleteConfirm.js"
 import ClockLoader from "react-spinners/ClockLoader";
 import { useScroll } from "motion/react"
 import { motion } from "motion/react"
+import { useSpring } from "motion/react"
+
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -22,6 +24,7 @@ function App() {
   const [filterByCompleted, setFilterByCompleted] = useState([])
   const [todosCount, setTodoCount] = useState(null)
   const [filterByPriority, setFilerByPriority] = useState(null)
+  const [scrollY, setScrollY] = useState(0);
 
   const { scrollYProgress } = useScroll();
  
@@ -119,14 +122,37 @@ const handleCompleteFilter = () => {
   setFilterByCompleted(!filterByCompleted)
 }
 
+useEffect(() => {
+  
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+  };
 
+  window.addEventListener('scroll', handleScroll);
+
+  
+  handleScroll();
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
+
+const scrollAnimation = useSpring(
+  scrollYProgress, {
+    stiffness: 100,
+  damping: 30,
+  restDelta: 0.001
+  }
+)
 
 return (
 
   
     <div className="todo-container">
       
-      <motion.div className='top-scroll' style={{ scaleX: scrollYProgress, originX: 0 }} />
+     {scrollY > 0 ? <motion.div className='top-scroll' style={{ scaleX: scrollAnimation, transformOrigin: '0%' }}/> : ''}
       <div className='title-flex'>
         <h1>KanDoCards</h1>
         <div className='priority-chart'>

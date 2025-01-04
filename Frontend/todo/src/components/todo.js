@@ -53,9 +53,9 @@ export default function Todo({ todos, setTodos, deleteTodo,
     const apiURL = "https://todoapp-production-eed7.up.railway.app/api/todos/";
 
     try {
-      await axios.post(`${apiURL}bulk-update/`, {
+       await axios.post(`${apiURL}bulk-update/`, {
         todos: newOrder
-      })
+    });
     }
     catch (error) {
         console.log(error)

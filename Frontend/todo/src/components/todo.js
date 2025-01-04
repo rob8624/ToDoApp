@@ -14,7 +14,7 @@ export default function Todo({ todos, setTodos, deleteTodo,
    deleting, setDeleting, handleDelete, filterByCompleted, filterByPriority}) {
 
     const [ordering, setOrdering] = useState(false)
-    const [originalTodos, ] = useState(todos)
+    const [originalTodos, setOriginalTodos ] = useState(todos)
 
 
     console.log('todos', todos) 
@@ -53,35 +53,34 @@ export default function Todo({ todos, setTodos, deleteTodo,
     const apiURL = "https://todoapp-production-eed7.up.railway.app/api/todos/";
 
     try {
-       await axios.post(`${apiURL}bulk-update/`, {
-        todos: newOrder
-    });
+        console.log("Sending data:", newOrder);
+        await axios.post(`${apiURL}`, {
+            todos: newOrder
+          });
+        setTodos(newOrder)
+        setOriginalTodos(newOrder)
+        return true;
     }
     catch (error) {
-        console.log(error)
-        setTodos(originalTodos)
+        console.log("Full error:", error);
+        
+        setTodos(originalTodos);
+        return false;
     }  
+}
 
-  }
-
-
-
-  const handleReorder = () => {
+const handleReorder = async () => {  // Make this async
     if (ordering) {
-      saveNewOrder(todos)
-
-     /*  console.log('saved')
-      setTodos(todos)
-      setOriginalTodos(todos)
-      setOrdering(!ordering)
- */
-      
-    } 
-    else {
-      setOrdering(!ordering)
+        const success = await saveNewOrder(todos);  // Wait for save to complete
+        if (success) {
+            setTodos(todos);
+            setOriginalTodos(todos);
+            setOrdering(false);
+        }
+    } else {
+        setOrdering(true);
     }
-    
-  };
+};
 
   const handleCancel = () => {
     

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 import { Reorder } from 'framer-motion';
 
 
@@ -14,15 +14,11 @@ export default function Todo({ todos, setTodos, deleteTodo,
    deleting, setDeleting, handleDelete, filterByCompleted, filterByPriority}) {
 
     const [ordering, setOrdering] = useState(false)
-    const [originalTodos, setOriginalTodos] = useState(todos)
+    const [originalTodos, ] = useState(todos)
 
 
     console.log('todos', todos) 
 
-    useEffect(() => {
-      setOriginalTodos(todos); // Re-sync when todos prop changes
-  }, [todos]);
-    
     
     const Container = ordering ? Reorder.Group : 'div';
     const ItemContainer = ordering ? Reorder.Item :'div'; 
@@ -53,12 +49,33 @@ export default function Todo({ todos, setTodos, deleteTodo,
       }
   }
 
-  const handleReorder = (newOrder) => {
+  const saveNewOrder = async (newOrder) => {
+    const apiURL = "https://todoapp-production-eed7.up.railway.app/api/todos/";
+
+    try {
+      await axios.post(`${apiURL}bulk-update/`, {
+        todos: newOrder
+      })
+    }
+    catch (error) {
+        console.log(error)
+        setTodos(originalTodos)
+    }  
+
+  }
+
+
+
+  const handleReorder = () => {
     if (ordering) {
-      console.log('saved')
+      saveNewOrder(todos)
+
+     /*  console.log('saved')
       setTodos(todos)
       setOriginalTodos(todos)
       setOrdering(!ordering)
+ */
+      
     } 
     else {
       setOrdering(!ordering)
@@ -67,6 +84,7 @@ export default function Todo({ todos, setTodos, deleteTodo,
   };
 
   const handleCancel = () => {
+    
     setTodos(originalTodos)
     setOrdering(false)
   }

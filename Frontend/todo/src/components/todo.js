@@ -54,7 +54,7 @@ export default function Todo({ todos, setTodos, deleteTodo,
 
     try {
         console.log("Sending data:", newOrder);
-        await axios.post(`${apiURL}`, {
+        await axios.post(`${apiURL}test_view/`, {
             todos: newOrder
           });
         setTodos(newOrder)

@@ -25,4 +25,5 @@ class TodoViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['post', 'get'])
     def test_view(self, request):
-        return JsonResponse({"message": "connection established viewset test"})
+        response = request.data
+        return JsonResponse({"message": response })

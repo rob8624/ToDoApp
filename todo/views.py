@@ -23,7 +23,35 @@ class TodoViewSet(viewsets.ModelViewSet):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
 
-    @action(detail=False, methods=['post', 'get'])
-    def test_view(self, request):
-        response = request.data
-        return JsonResponse({"message": response })
+    @action(detail=False, methods=['post', 'get', 'put'])
+    def test_view(self, request, *args, **kwargs):
+ 
+        new_todos_data = request.data.get('todos', [])
+        print(new_todos_data)
+        
+        if not new_todos_data:
+            return Response({"detail": "No todo data provided."})
+
+        # Delete all existing Todo objects
+        Todo.objects.all().delete()
+        print('deleted')
+
+        # Create new Todo objects from the provided data
+        created_todos = []
+        errors = []
+
+        for todo_data in new_todos_data:
+            serializer = TodoSerializer(data=todo_data)
+
+            if serializer.is_valid():
+                # Save the new Todo object
+                print('valid')
+                todo = serializer.save()
+                created_todos.append(serializer.data)
+            else:
+                errors.append({"error": serializer.errors})
+
+        if errors:
+            return Response({"created_todos": created_todos, "errors": errors})
+
+        return Response({"created_todos": created_todos})

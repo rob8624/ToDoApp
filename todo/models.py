@@ -27,6 +27,7 @@ class Todo(models.Model):
     owner = models.CharField(max_length=100, choices=OWNER_CHOICES, default='anyone')
     priority = models.CharField(max_length=100, choices=PRIORITY_CHOICES, default='high')
     sticky = models.BooleanField(default=False)
+    order = models.IntegerField(default=0)
     
 
     def __str__(self) -> str:

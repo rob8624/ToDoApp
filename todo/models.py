@@ -33,6 +33,14 @@ class Todo(models.Model):
     def __str__(self) -> str:
         return self.title
     
+    def save(self, *args, **kwargs):
+    # Automatically assign order if not already set (for new todos)
+        if self.order == 0:  # Assuming you want to set order to the last + 1
+            max_order = Todo.objects.aggregate(models.Max('order'))['order__max'] or 0
+            self.order = max_order + 1
+        super().save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['order'] 
     
 

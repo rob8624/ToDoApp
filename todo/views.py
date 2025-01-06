@@ -39,16 +39,24 @@ class TodoViewSet(viewsets.ModelViewSet):
         # Create new Todo objects from the provided data
         created_todos = []
         errors = []
+        order_count = 0
 
         for todo_data in new_todos_data:
-            serializer = TodoSerializer(data=todo_data)
+             
+             todo_data['order'] = order_count
+             order_count += 1  # Increment the counter
+    
+             print(todo_data['order'])
+            
+            
+             serializer = TodoSerializer(data=todo_data)
 
-            if serializer.is_valid():
+             if serializer.is_valid():
                 # Save the new Todo object
                 print('valid')
                 todo = serializer.save()
                 created_todos.append(serializer.data)
-            else:
+             else:
                 errors.append({"error": serializer.errors})
 
         if errors:

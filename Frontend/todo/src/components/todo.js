@@ -69,7 +69,7 @@ export default function Todo({ todos, setTodos, deleteTodo,
     }  
 }
 
-const handleReorder = async () => {  // Make this async
+const handleReorder = async () => {  
     if (ordering) {
         const success = await saveNewOrder(todos);  // Wait for save to complete
         if (success) {

@@ -50,11 +50,11 @@ export default function Todo({ todos, setTodos, deleteTodo,
   }
 
   const saveNewOrder = async (newOrder) => {
-    const apiURL = "https://todoapp-production-eed7.up.railway.app/api/todos/";
+    const apiURL = "http://127.0.0.1:8000/api/todos/";
 
     try {
         console.log("Sending data:", newOrder);
-        await axios.put(`${apiURL}test_view/`, {
+        await axios.post(`${apiURL}test_view/`, {
             todos: newOrder
           });
         setTodos(newOrder)
@@ -94,7 +94,7 @@ const handleReorder = async () => {
 
     return (
       
-       <Container {...ordering && { values: todos, onReorder: setTodos }}> 
+       <Container {...ordering && { values: todos, onReorder: setTodos, }}> 
     <div className='todo-flex'>
      <div style={{color:'white'}} onClick={handleReorder}>{ ordering ? 'Save' : 'ReOrder'}</div>
      {ordering && <div style={{color:'white'}} onClick={handleCancel}>Cancel</div>}

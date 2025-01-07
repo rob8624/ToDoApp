@@ -19,47 +19,48 @@ def test_connection(request):
     return JsonResponse({"message": "connection established"})
 
 
+from django.shortcuts import get_object_or_404
+from rest_framework import status
+
 class TodoViewSet(viewsets.ModelViewSet):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
 
     @action(detail=False, methods=['post', 'get', 'put'])
     def test_view(self, request, *args, **kwargs):
- 
         new_todos_data = request.data.get('todos', [])
-        print(new_todos_data)
+        print("Incoming todos data:", new_todos_data)
         
         if not new_todos_data:
             return Response({"detail": "No todo data provided."})
 
-        # Delete all existing Todo objects
-        Todo.objects.all().delete()
-        print('deleted')
-
-        # Create new Todo objects from the provided data
-        created_todos = []
         errors = []
-        order_count = 0
+        updated_todos = []
 
-        for todo_data in new_todos_data:
-             
-             todo_data['order'] = order_count
-             order_count += 1  # Increment the counter
-    
-             print(todo_data['order'])
-            
-            
-             serializer = TodoSerializer(data=todo_data)
+        try:
+            for index, todo_data in enumerate(new_todos_data):
+                try:
+                    todo = Todo.objects.get(id=todo_data['id'])
+                    print(f"Found todo {todo.id}: {todo.title}")
+                    todo.order = index
+                    todo.save()
+                    updated_todos.append(todo.id)
+                except Todo.DoesNotExist:
+                    errors.append(f"Todo with id {todo_data['id']} not found")
+                except KeyError:
+                    errors.append(f"Todo data missing ID field: {todo_data}")
 
-             if serializer.is_valid():
-                # Save the new Todo object
-                print('valid')
-                todo = serializer.save()
-                created_todos.append(serializer.data)
-             else:
-                errors.append({"error": serializer.errors})
+            if errors:
+                return Response({
+                    "errors": errors
+                }, status=status.HTTP_400_BAD_REQUEST)
 
-        if errors:
-            return Response({"created_todos": created_todos, "errors": errors})
+            return Response({
+                "message": "Todos reordered successfully",
+                "updated": updated_todos
+            })
 
-        return Response({"created_todos": created_todos})
+        except Exception as e:
+            return Response({
+                "error": str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
